@@ -16,7 +16,7 @@ app.service('AuthService', function($q, $http, OAUTH2) {
     var useCredentails = function(token) {
         username = token.name;
         isAuthenticated = true;
-        authToken = token.access_token;
+        authToken = token;
         
         // $http.defaults.headers.common['X-Auth-Token'] = token;
         $http.defaults.headers.common['Authorization'] = 'Bearer ' + token.access_token;
@@ -87,7 +87,7 @@ app.service('AuthService', function($q, $http, OAUTH2) {
         login: login,
         logout: logout,
         signup: signup,
-        isAuthenticated: function() {return isAuthenticated;},
+        isAuthenticated: function() {return isAuthenticated && authToken && authToken.expires>(new Date()).getTime();},
         username: function() {
             return username;
         }

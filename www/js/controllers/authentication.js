@@ -14,7 +14,7 @@ app.controller('LoginCtrl', function ($scope, $state, $ionicPopup, AuthService) 
 		console.log("LoginCtrl::login");
 		if (form.$valid) {
             AuthService.login($scope.formData.email, $scope.formData.password).then(function(authenticated) {
-                $state.go('tab', {}, {reload: true});
+                $state.go('tab.meals', {}, {reload: true});
             }, function(err) {
                 var alertPopup = $ionicPopup.alert({
                     title: 'Login failed',
@@ -44,7 +44,7 @@ app.controller('SignupCtrl', function ($scope, $state, AuthService) {
         if (form.$valid) {
             console.log("SignupCtrl::signup");
             AuthService.signup($scope.formData.email, $scope.formData.firstname, $scope.formData.lastname, $scope.formData.password).then(function(authenticated) {
-                $state.go('tab', {}, {reload: true});
+                $state.go('tab.meals', {}, {reload: true});
             }, function(err) {
                 var alertPopup = $ionicPopup.alert({
                     title: 'Signup failed',
