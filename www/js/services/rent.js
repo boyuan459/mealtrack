@@ -1,27 +1,27 @@
 var app = angular.module('mealtrack.services.rent', ['ngResource', 'toaster']);
 
-app.factory("Contact", function($resource) {
+app.factory("Property", function($resource) {
 //    return $resource("https://codecraftpro.com/api/samples/v1/contact/:id/");
-    return $resource('http://restcms.local/api/v1/contact/:id/', {id:'@id'}, {
+    return $resource('http://restcms.local/api/v1/property/:id/', {id:'@id'}, {
         update: {
             method: 'PUT'
         }
     });
 });
 
-app.service("RentService", function (Contact, $rootScope, $q, $http, toaster) {
+app.service("RentService", function (Property, $rootScope, $q, $http, toaster) {
 	var self = {
-        'getPerson': function(email) {
-            console.log(email);
-            for (var i=0;i<self.persons.length;i++) {
-                var obj = self.persons[i];
-                if (obj.email == email) {
+        'getProperty': function(id) {
+            console.log(id);
+            for (var i=0;i<self.properties.length;i++) {
+                var obj = self.properties[i];
+                if (obj.id == id) {
                     return obj;
                 }
             }
         },
-        'addPerson': function(person) {
-            this.persons.push(person);
+        'addProperty': function(property) {
+            this.properties.push(property);
         },
         'page': 1,
         'hasMore': true,
@@ -29,19 +29,19 @@ app.service("RentService", function (Contact, $rootScope, $q, $http, toaster) {
         'isSaving': false,
         'isDeleting': false,
         'selectedPerson': null,
-        'persons': [],
+        'properties': [],
         'search': null,
         'ordering': 'name',
         'doSearch': function() {
             self.hasMore = true;
             self.page = 1;
-            self.persons = [];
+            self.properties = [];
             self.load();
         },
         'doOrder': function() {
             self.hasMore = true;
             self.page = 1;
-            self.persons = [];
+            self.properties = [];
             self.load();
         },
         'load': function() {
@@ -55,10 +55,10 @@ app.service("RentService", function (Contact, $rootScope, $q, $http, toaster) {
                 };
                 
                 var d = $q.defer();
-                Contact.get(params).$promise.then(function(result) {
+                Property.get(params).$promise.then(function(result) {
                     console.log(result);
-                    angular.forEach(result.data, function(person) {
-                        self.persons.push(new Contact(person));
+                    angular.forEach(result.data, function(property) {
+                        self.properties.push(new Property(property));
                     });
                     if (result.current_page >= result.last_page) {
                         self.hasMore = false;
@@ -78,47 +78,11 @@ app.service("RentService", function (Contact, $rootScope, $q, $http, toaster) {
                 self.load();
             }
         },
-        'updateContact': function(person) {
-            var d = $q.defer();
-            self.isSaving = true;
-//            Contact.update(person).$promise.then(function() {
-            person.$update().then(function() {
-                self.isSaving = false;
-                toaster.pop('success', 'Updated ' + person.name);
-                d.resolve();
-            });
+        'trackProperty': function(property) {
             
-            return d.promise;
         },
-        'removeContact': function(person) {
-            var d = $q.defer();
-            self.isDeleting = true;
-            person.$remove().then(function() {
-                self.isDeleting = false;
-                var index = self.persons.indexOf(person);
-                self.persons.splice(index, 1);
-                self.selectedPerson = null;
-                toaster.pop('success', 'Deleted ' + person.name);
-                d.resolve();
-            });
-            
-            return d.promise;
-        },
-        'createContact': function(person) {
-            var d = $q.defer();
-            self.isSaving = true;
-            Contact.save(person).$promise.then(function(data) {
-                self.isSaving = false;
-                self.selectedPerson = null;
-                self.hasMore = true;
-                self.page = 1;
-                self.persons = [];
-                self.loadContacts();
-                toaster.pop('success', 'Created ' + person.name);
-                d.resolve(data);
-            });
-            
-            return d.promise;
+        'removeProperty': function(person) {
+           
         },
         'watchFilters': function() {
             $rootScope.$watch(function() {
