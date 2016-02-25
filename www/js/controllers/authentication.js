@@ -14,7 +14,7 @@ app.controller('LoginCtrl', function ($scope, $state, $ionicPopup, AuthService) 
 		console.log("LoginCtrl::login");
 		if (form.$valid) {
             AuthService.login($scope.formData.email, $scope.formData.password).then(function(authenticated) {
-                $state.go('tab.meals', {}, {reload: true});
+                $state.go('tab.rent', {}, {reload: true});
             }, function(err) {
                 var alertPopup = $ionicPopup.alert({
                     title: 'Login failed',

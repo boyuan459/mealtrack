@@ -2,14 +2,13 @@ var app = angular.module('mealtrack', [
 	'ionic',
 	'ngMessages',
 	'ngCordova',
+    'ngResource',
 	'angularMoment',
-	'parse-angular',
-	'parse-angular.enhance',
 	'mealtrack.controllers.authentication',
-	'mealtrack.controllers.meals',
+	'mealtrack.controllers.rent',
 	'mealtrack.controllers.account',
 	'mealtrack.services.authentication',
-	'mealtrack.services.meals',
+	'mealtrack.services.rent',
 	'mealtrack.filters.mealtime'
 ]);
 
@@ -26,6 +25,11 @@ app.run(function ($ionicPlatform) {
 		}
 	});
     
+});
+
+//for test purpose
+app.config(function($httpProvider) {
+    $httpProvider.defaults.headers.common['Authorization'] = 'Bearer 8TuuEAeJqEVgOAbLoYWOwY1DtK57aq9X0SwYm9mR';
 });
 
 app.config(function ($stateProvider, $urlRouterProvider) {
@@ -47,12 +51,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			abstract: true,
 			templateUrl: "templates/tabs.html"
 		})
-		.state('tab.meals', {
-            url: '/meals',
+		.state('tab.rent', {
+            url: '/rent',
             views: {
-                'tab-meals': {
-                    templateUrl: 'templates/tabs/tab-meals.html',
-                    controller: 'MealListCtrl'
+                'tab-rent': {
+                    templateUrl: 'templates/tabs/tab-rent.html',
+                    controller: 'RentListCtrl'
                 }
             }
         })
@@ -61,7 +65,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             views: {
                 'tab-track': {
                     templateUrl: 'templates/tabs/tab-track.html',
-                    controller: 'MealCreateCtrl'
+                    controller: 'RentTrackCtrl'
                 }
             }
         })
