@@ -12,22 +12,53 @@
   <ion-content class="has-subheader" scrollbar-y="false">
       
     
-    <div class="card" id="market-data-card">
-        
+    <div class="card item-card">
+
+        <div class="item">
+            <h2>{{property.address}}, {{property.city}} {{property.state}}</h2 >
+            <h3>Date Available: {{property.available | date:'d-MMM-yyyy'}}</h3>
+            <p>{{property.type}} Bedrooms: {{property.bedrooms}} Bathrooms: {{property.bathrooms}}</p>
+			</div >
+
+			<div class="item item-image"
+			     ng-if="property.photo" >
+				<img ng-src="{{property.photo}}" >
+			</div >
+			
     </div>
     
-    <div class="card" id="stock-notes">
-        <div class="item item-divider">Notes <span ng-click="addNote()" class="add-stock-note">Add <i class="icon ion-ios-plus"></i></span></div>
-        <a class="item" ng-repeat="note in stockNotes track by $index" ng-click="openNote($index, note.title, note.body)">
-            <h2>title</h2>
-            <h6>date</h6>
+    <div class="card">
+        <div class="item item-divider">
+            {{property.address}}
+        </div>
+        <div class="item item-text-wrap">
+            <h2>{{property.highlight}}</h2>
+            <p>{{property.premark}}</p><br/>
+            <h2>To book an inspection please contact {{property.contact}} {{property.phonenumber}}</h2>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="item item-divider">
+            General Features
+        </div>
+        <div class="item item-text-wrap">
+            <p>Property Type: <strong>{{property.type}}</strong></p>
+            <p>Bedrooms: <strong>{{property.bedrooms}}</strong></p>
+            <p>Bathrooms: <strong>{{property.bathrooms}}</strong></p>
+            <p>Rent: <strong>{{property.rent}}</strong> per {{property.rent_type}}</p>
+            <p>Bond: <strong>{{property.bond | currency:"$":0}}</strong></p>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="item item-divider">
+            Other Features
+        </div>
+        <div class="item item-text-wrap">
+            <p>{{property.pxremark}}</p>
             
-        </a>
-    </div>
-    
-    <div class="card" id="stock-news">
-        <div class="item item-divider">News</div>
-        
+        </div>
     </div>
   </ion-content>
 </ion-view>

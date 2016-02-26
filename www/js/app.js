@@ -29,7 +29,8 @@ app.run(function ($ionicPlatform) {
 
 //for test purpose
 app.config(function($httpProvider) {
-    $httpProvider.defaults.headers.common['Authorization'] = 'Bearer 8TuuEAeJqEVgOAbLoYWOwY1DtK57aq9X0SwYm9mR';
+    // $httpProvider.defaults.headers.common['Authorization'] = 'Bearer 8TuuEAeJqEVgOAbLoYWOwY1DtK57aq9X0SwYm9mR';
+    $httpProvider.defaults.headers.common['Authorization'] = 'Bearer 0xGk7R40gr3A85DNZ1e6hxcRrFWb0YQpQi0lQqWa';
 });
 
 app.config(function ($stateProvider, $urlRouterProvider) {
@@ -61,7 +62,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             }
         })
         .state('tab.rent-property', {
-            url: '/rent/:property',
+            url: '/rent/:propertyId',
             views: {
                 'tab-rent': {
                     templateUrl: 'templates/tabs/tab-rent-property.html',

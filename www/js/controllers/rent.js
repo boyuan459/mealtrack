@@ -27,8 +27,19 @@ app.controller('RentListCtrl', function ($scope, $ionicLoading, RentService) {
 
 });
 
-app.controller('PropertyCtrl', function($scope) {
+app.controller('PropertyCtrl', function($scope, $stateParams, RentService) {
+    $scope.reactiveColor = {'background-color': '#33cd5f', 'border-color': 'rgba(255,255,255,.3)'};
+    $scope.propertyId = $stateParams.propertyId;
     
+    $scope.$on('$ionicView.afterEnter', function() {
+        getProperty();
+    });
+    
+    function getProperty() {
+        $scope.property = RentService.getProperty($scope.propertyId);
+        $scope.property.available = new Date($scope.property.available);
+        console.log($scope.property);
+    }
 });
 
 /*********************************************************************

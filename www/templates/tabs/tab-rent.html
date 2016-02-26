@@ -7,7 +7,7 @@
 		</ion-refresher >
 
 		<div class="list card item-card"
-		     ng-repeat="property in rent.properties" ui-sref="tab.rent-property({property: property.id})">
+		     ng-repeat="property in rent.properties" ui-sref="tab.rent-property({propertyId: property.id})">
 
 			<div class="item" >
 				<h2 >{{property.address}}</h2 >
@@ -21,7 +21,7 @@
 
 			<div class="item " >
 				<span class="category" >Bedrooms: {{property.bedrooms}}</span >
-				<span class="calories" >{{property.bathrooms}} Bathrooms</span >
+				<span class="calories" > Bathrooms: {{property.bathrooms}}</span >
 			</div >
 
 		</div >
