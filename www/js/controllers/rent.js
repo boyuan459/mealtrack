@@ -20,11 +20,15 @@ app.controller('RentListCtrl', function ($scope, $ionicLoading, RentService) {
 	};
 
 	$scope.nextPage = function () {
-		$scope.rent.next().then(function () {
+		$scope.rent.loadMore().then(function () {
 			$scope.$broadcast('scroll.infiniteScrollComplete');
 		});
 	};
 
+});
+
+app.controller('PropertyCtrl', function($scope) {
+    
 });
 
 /*********************************************************************

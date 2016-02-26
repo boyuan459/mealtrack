@@ -60,6 +60,15 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         })
+        .state('tab.rent-property', {
+            url: '/rent/:property',
+            views: {
+                'tab-rent': {
+                    templateUrl: 'templates/tabs/tab-rent-property.html',
+                    controller: 'PropertyCtrl'
+                }
+            }
+        })
         .state('tab.track', {
             url: '/track',
             views: {

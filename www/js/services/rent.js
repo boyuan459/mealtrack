@@ -75,7 +75,7 @@ app.service("RentService", function (Property, $rootScope, $q, $http, toaster) {
             if (self.isLoading) return;
             if (self.hasMore && !self.isLoading) {
                 self.page += 1;
-                self.load();
+                return self.load();
             }
         },
         'trackProperty': function(property) {
