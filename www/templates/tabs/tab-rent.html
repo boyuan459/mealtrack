@@ -7,34 +7,34 @@
 		</ion-refresher >
 
 		<div class="list card item-card"
-		     ng-repeat="meal in meals.results" >
+		     ng-repeat="property in rent.properties" >
 
 			<div class="item" >
-				<h2 >{{meal.attributes.title}}</h2 >
-				<p>{{meal.attributes.created | mealtime}} - <span am-time-ago="meal.attributes.created"></span></p>
+				<h2 >{{property.address}}</h2 >
+				<p>{{property.city}} {{property.state}}</p>
 			</div >
 
 			<div class="item item-image"
-			     ng-if="meal.attributes.picture" >
-				<img ng-src="{{meal.attributes.picture.url()}}" >
+			     ng-if="property.photo" >
+				<img ng-src="{{property.photo}}" >
 			</div >
 
 			<div class="item " >
-				<span class="category" >#{{meal.attributes.category|lowercase}}</span >
-				<span class="calories" >{{meal.attributes.calories}}cal</span >
+				<span class="category" >Bedrooms: {{property.bedrooms}}</span >
+				<span class="calories" >{{property.bathrooms}} Bathrooms</span >
 			</div >
 
 		</div >
 
 
 		<ion-infinite-scroll
-				ng-if="meals.hasMore"
+				ng-if="rent.hasMore"
 				on-infinite="nextPage()"
 				immediate-check="false" >
 		</ion-infinite-scroll >
 
 		<div class="padding text-center"
-		     ng-if="!meals.hasMore" >
+		     ng-if="!rent.hasMore" >
 			<p >No more results</p >
 		</div >
 	</ion-content >

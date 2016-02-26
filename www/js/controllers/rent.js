@@ -14,9 +14,9 @@ app.controller('RentListCtrl', function ($scope, $ionicLoading, RentService) {
     });
    
 	$scope.refreshItems = function () {
-		$scope.rent.refresh().then(function () {
-			$scope.$broadcast('scroll.refreshComplete');
-		});
+        $scope.rent.load().then(function () {
+            $scope.$broadcast('scroll.refreshComplete');
+        });
 	};
 
 	$scope.nextPage = function () {
